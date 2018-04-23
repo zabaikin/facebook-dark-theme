@@ -1,6 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Facebook Dark Theme",
+    "description": "Dark Theme for Facebook. Also display settings to show or hide default blocks.",
     "version": "0.1",
     "content_scripts": [
         {
@@ -14,6 +15,7 @@
         "scripts": ["background.js"]
     },
     "browser_action": {
-        "default_icon": "icon.png"
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
     }
 }
