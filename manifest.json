@@ -1,21 +1,26 @@
 {
     "manifest_version": 2,
-    "name": "Facebook Dark Theme",
-    "description": "Dark Theme for Facebook. Also display settings to show or hide default blocks.",
+    "name": "Facebook Simplify",
+    "description": "Facebook Simplify. Pick a theme and hide unuseful blocks.",
     "version": "0.1",
     "content_scripts": [
         {
             "matches": [
                 "https://www.facebook.com/*", "http://www.facebook.com/*"
             ],
-            "js": ["content.js"]
+            "js": ["content.js"],
+            "css": ["content.css"]
         }
     ],
     "background": {
-        "scripts": ["background.js"]
+        "scripts": ["background.js"],
+        "persistent": false
     },
     "browser_action": {
         "default_icon": "icon.png",
         "default_popup": "popup.html"
-    }
+    },
+    "permissions": [
+        "storage"
+    ]
 }

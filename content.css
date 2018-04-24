@@ -1,0 +1,7 @@
+body, #contentCol {
+    background-color: #BDBDBD !important;
+}
+
+#bluebarRoot > div {
+    background-color: #212121;
+}
