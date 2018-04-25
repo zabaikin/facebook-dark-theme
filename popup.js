@@ -1,18 +1,21 @@
-function toggle_games_block_visibility() {
-    getStorageValueByKey('hide_games', toggleStorageData);
-}
-
-function toggleStorageData(result) {
-    //just for test
-    var key = Object.keys(result)[0];
-    result[key] = !result[key];
-    chrome.storage.local.set(result)
-}
-
-function getStorageValueByKey (key, callback) {
-    chrome.storage.local.get([key], function(result) {
-        callback(result);
+function _getStorageValueByKey (key, callback, prop) {
+    chrome.storage.sync.get([key], function(result) {
+        callback(result, prop);
     });
 }
 
-document.getElementById('hide_games').addEventListener('click', toggle_games_block_visibility);
+function toggleStorageData (result, prop) {
+    result.data[prop] = !result.data[prop];
+    chrome.storage.sync.set({'data': result.data})
+}
+
+function toggle_block_visibility (block) {
+    _getStorageValueByKey('data', toggleStorageData, block);
+}
+
+
+
+
+
+document.getElementById('hide_games').addEventListener('click', toggle_block_visibility.bind(this,'hide_games'));
+document.getElementById('hide_stories').addEventListener('click', toggle_block_visibility.bind(this,'hide_stories'));
