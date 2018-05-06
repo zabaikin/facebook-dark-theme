@@ -1,4 +1,7 @@
 document.body.addEventListener('click',buttonClicked,false);
+document.addEventListener('DOMContentLoaded', function () {
+    _restoreOptions();
+});
 
 function buttonClicked(e){
     e = e || window.event;
@@ -22,4 +25,15 @@ function toggleStorageData (result, blockId) {
 
 function toggle_block_visibility (blockId) {
     _getStorageValueByKey('data', toggleStorageData, blockId);
+}
+
+
+function _restoreOptions() {
+    chrome.storage.sync.get(['data'], function (result) {
+        for (key in result.data) {
+            if (result.data.hasOwnProperty(key)) {
+                document.getElementById(key).checked = !result.data[key];
+            }
+        }
+    });
 }
