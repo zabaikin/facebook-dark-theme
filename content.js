@@ -6,11 +6,13 @@ chrome.runtime.onMessage.addListener(
   }
 );
 
-chrome.storage.sync.set({
-    'data': {
-        'hide_games':false,
-        'hide_stories': false
-}})
+chrome.storage.sync.get(['data'], function(result) {
+    for (key in result.data) {
+        if (result.data.hasOwnProperty(key)) {
+            _toggleBlockVisibility(key, result.data[key])
+        }
+    }
+});
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
     for (key in changes) {
@@ -22,15 +24,15 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 
         for (key in storageChange.oldValue) {
             if (storageChange.oldValue[key] != storageChange.newValue[key]) {
-                _toggleBlockVisibility(key)
+                _toggleBlockVisibility(key, storageChange.newValue[key])
             }
         }
     }
 });
 
-function _toggleBlockVisibility (key) {
-    console.log(key);
+function _toggleBlockVisibility (key, value) {
+    var block = document.getElementById(key);
+    if (block) {
+        block.style.display = value ? 'block' : 'none';
+    }
 }
-
-
-document.querySelector('#pagelet_canvas_nav_content').style.display = 'none';

@@ -5,3 +5,8 @@ body, #contentCol {
 #bluebarRoot > div {
     background-color: #212121;
 }
+
+._4jy1 {
+    background-color: #212121 !important;
+    border-color: #BDBDBD !important;
+}
